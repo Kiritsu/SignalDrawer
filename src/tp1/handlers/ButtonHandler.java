@@ -27,7 +27,7 @@ public class ButtonHandler implements ActionListener {
         }
         catch (InvalidSignalException ex) {
             JOptionPane.showMessageDialog(this.fenetre,
-                    "Le signal entré contient un caractère invalide (" + ex.getCharacter() + ") à la position: " + ex.getCharPos());
+                    "Le signal entré contient le caractère invalide '" + ex.getCharacter() + "' à la position " + ex.getCharPos());
         }
     }
 }

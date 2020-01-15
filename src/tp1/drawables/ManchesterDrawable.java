@@ -15,36 +15,14 @@ public class ManchesterDrawable implements IDrawableSignal {
         g.setColor(Color.RED);
 
         for (int i = 0; i < signal.length; ++i) {
+            int refX = (i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2);
+            int lineOne = (int)(model.diffHeight * 0.5);
+            int lineZero = (int)(model.diffHeight * 2.5);
+
             if (signal[i] == 1) {
-                g.drawLine(model.diffWidth * i,
-                        (int)(model.diffHeight * 0.5),
-                        (i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 0.5));
-
-                g.drawLine((i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 0.5),
-                        (i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 2.5));
-
-                g.drawLine((i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 2.5),
-                        model.diffWidth * (i + 1),
-                        (int)(model.diffHeight * 2.5));
+                drawLines(g, model, i, refX, lineZero, lineOne);
             } else {
-                g.drawLine(model.diffWidth * i,
-                        (int)(model.diffHeight * 2.5),
-                        (i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 2.5));
-
-                g.drawLine((i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 2.5),
-                        (i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 0.5));
-
-                g.drawLine((i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2),
-                        (int)(model.diffHeight * 0.5),
-                        model.diffWidth * (i + 1),
-                        (int)(model.diffHeight * 0.5));
+                drawLines(g, model, i, refX, lineOne, lineZero);
             }
 
             if (i + 1 == signal.length) {
@@ -56,5 +34,13 @@ public class ManchesterDrawable implements IDrawableSignal {
                         (model.diffWidth * i) + model.diffWidth, (int)(model.diffHeight * 2.5));
             }
         }
+    }
+
+    private void drawLines(Graphics g, DrawableModel model, int i, int refX, int baseLine, int targetLine) {
+        g.drawLine(model.diffWidth * i, targetLine, refX, targetLine);
+
+        g.drawLine(refX, targetLine, refX, baseLine);
+
+        g.drawLine(refX, baseLine, model.diffWidth * (i + 1), baseLine);
     }
 }
