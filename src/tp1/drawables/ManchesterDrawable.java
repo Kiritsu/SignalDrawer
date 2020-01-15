@@ -36,6 +36,15 @@ public class ManchesterDrawable implements IDrawableSignal {
         }
     }
 
+    /**
+     * Dessine les lignes permettant de représenter un élément du signal.
+     * @param g Graphique sur lequel dessiner.
+     * @param model Modèle indiquant tous les détails nécessaires au dessin du signal.
+     * @param i Index du signal en train d'être dessiné.
+     * @param refX Valeur X de référence sur laquelle se baser pour dessiner les lignes.
+     * @param baseLine Ligne d'où les traits partent.
+     * @param targetLine Ligne sur laquelle les traits arrivent.
+     */
     private void drawLines(Graphics g, DrawableModel model, int i, int refX, int baseLine, int targetLine) {
         g.drawLine(model.diffWidth * i, targetLine, refX, targetLine);
 
