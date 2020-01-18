@@ -14,10 +14,11 @@ public class ManchesterDrawable implements IDrawableSignal {
     public void draw(Graphics g, byte[] signal, DrawableModel model) {
         g.setColor(Color.RED);
 
+        int lineOne = (int)(model.diffHeight * 0.5);
+        int lineZero = (int)(model.diffHeight * 2.5);
+
         for (int i = 0; i < signal.length; ++i) {
             int refX = (i == 0 ? model.diffWidth : model.diffWidth * (i + 1)) - (model.diffWidth / 2);
-            int lineOne = (int)(model.diffHeight * 0.5);
-            int lineZero = (int)(model.diffHeight * 2.5);
 
             if (signal[i] == 1) {
                 drawLines(g, model, i, refX, lineZero, lineOne);
